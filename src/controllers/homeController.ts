@@ -1,17 +1,17 @@
 import * as express from 'express'
 import { Request, Response } from 'express'
-import { PlayerService } from '../services/aoe2ApiService';
+import { ApiPlayerService } from '../services/aoe2ApiService';
 
 
 export class HomeController {
     public path = '/'
 
     public router = express.Router();
-    private _playerService: PlayerService;
+    private _playerService: ApiPlayerService;
     
     constructor() {
         this.initRoutes();
-        this._playerService = new PlayerService();
+        this._playerService = new ApiPlayerService();
     }
 
     public initRoutes() {

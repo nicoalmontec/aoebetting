@@ -1,22 +1,3 @@
-export interface ApiPlayer {
-    profileID:    number;
-    steamID:      string;
-    name:         string;
-    clan:         string;
-    country:      string;
-    slot:         number;
-    slotType:     number;
-    rating:       number;
-    ratingChange: number;
-    games:        number;
-    wins:         number;
-    streak:       number;
-    drops:        number;
-    color:        number;
-    team:         number;
-    civ:          number;
-    won:          boolean;
-}
 
 export class Player {
     constructor(private username: string,

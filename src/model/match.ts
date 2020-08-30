@@ -1,71 +1,7 @@
-export interface Match {
-    matchID:           string;
-    lobbyID:           number;
-    matchUUID:         string;
-    version:           string;
-    name:              string;
-    numPlayers:        number;
-    numSlots:          number;
-    averageRating:     number;
-    cheats:            boolean;
-    fullTechTree:      boolean;
-    endingAge:         number;
-    expansion:         string;
-    gameType:          number;
-    hasCustomContent:  boolean;
-    hasPassword:       boolean;
-    lockSpeed:         boolean;
-    lockTeams:         boolean;
-    mapSize:           number;
-    mapType:           number;
-    pop:               number;
-    ranked:            boolean;
-    leaderboardID:     number;
-    ratingType:        number;
-    resources:         number;
-    rms:               string;
-    scenario:          string;
-    server:            string;
-    sharedExploration: boolean;
-    speed:             number;
-    startingAge:       number;
-    teamTogether:      boolean;
-    teamPositions:     boolean;
-    treatyLength:      number;
-    turbo:             boolean;
-    victory:           number;
-    victoryTime:       number;
-    visibility:        number;
-    opened:            number;
-    started:           number;
-    finished:          number;
-    //players:           Player[];
-}
-
-export interface ApiContent {
-    language:    string;
-    age:         Description[];
-    civ:         Description[];
-    gameType:    Description[];
-    leaderboard: Description[];
-    mapSize:     Description[];
-    mapType:     Description[];
-    ratingType:  Description[];
-    resources:   Description[];
-    speed:       Description[];
-    victory:     Description[];
-    visibility:  Description[];
-}
-
-export interface Description{
- id: number;
- name: string;
-}
-
 export class Match{
     constructor(
         private matchId: string,
-        private map: Description,
+        private map: string,
         private openedDate: number,
         private startedDate: number,
         private finishedDate: number) {
@@ -75,7 +11,7 @@ export class Match{
         return this.matchId;
     }
     
-    public get getMap() : Description {
+    public get getMap() : string {
         return this.map;
     }
     
