@@ -21,6 +21,7 @@ export class HomeController {
     index = async (req: Request, res: Response) => {
         
         let result = await this._playerService.getPlayers(2);
+
         res.send(result);
     }
 }

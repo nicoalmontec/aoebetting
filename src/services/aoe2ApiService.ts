@@ -21,7 +21,7 @@ export class ApiPlayerService implements IApiPlayerService {
    
 
     async getApiMaps(): Promise<Description[]> {
-        let apiParams = `strings?game=aoe2de&language=en`;
+        const apiParams = `strings?game=aoe2de&language=en`;
 
         let content = <ApiContent> await this.http.get(apiParams);
         
@@ -38,7 +38,7 @@ export class ApiPlayerService implements IApiPlayerService {
      */
     async getPlayerMatchHistory(profileId: number, numberOfMatches: number): Promise<Match[]> {
 
-       let apiParams = `player/matches?game=aoe2de&profile_id=${profileId}&count=${numberOfMatches}`;
+       const apiParams = `player/matches?game=aoe2de&profile_id=${profileId}&count=${numberOfMatches}`;
        
        let matches = await this.http.get(apiParams);
 
@@ -53,7 +53,7 @@ export class ApiPlayerService implements IApiPlayerService {
      *
      */
     async getPlayers(count: number): Promise<ApiPlayer[]> {
-        let apiParams = `leaderboard?game=aoe2de&leaderboard_id=3&start=1&count=${count}`;
+         const apiParams = `leaderboard?game=aoe2de&leaderboard_id=3&start=1&count=${count}`;
 
          let play = await this.http.get(apiParams);
 
