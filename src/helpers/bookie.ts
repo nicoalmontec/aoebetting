@@ -37,24 +37,26 @@ export class Bookie {
             bets = stubBets.concat(bets);
         }
 
-        let probs = this.balanceProbFromBets(bets);
+        let probs = await this.balanceProbFromBets(bets);
 
-        let impliedOdds = {};
+        let impliedOdds: Array<Bet>=[];
         let numOutcomes = 2; //only two possible outcomes (over and under)
         
+
         for (let k in probs)
         {
-            let p = probs[k] + this.VIGORISH / numOutcomes;
-            impliedOdds[k] = (await this._oddsConverter.fromProbability(p)).getAmerican;
+            let p = probs[k].amount + this.VIGORISH / numOutcomes;
+
+            impliedOdds.push({betSide:  probs[k].betSide, amount: (await this._oddsConverter.fromProbability(p)).getAmerican});
         }
 
-        return bets;
+        return impliedOdds;
     }
 
-    public async balanceProbFromBets(bets: Array<Bet>): Promise<any>
+    public async balanceProbFromBets(bets: Array<Bet>): Promise<Array<Bet>>
     {
         let total = 0; 
-        let outcomes = {};
+        let outcomeTotals: Array<Bet> = [];
 
         bets.forEach(function(betTuple)
         {
@@ -62,14 +64,23 @@ export class Bookie {
             let amount = betTuple.amount;
             
             // increment total bet and outcome specific amount
-            total += amount;		
-            outcomes[outcome] = outcomes[outcome] + amount || amount;
-        });
+            total += amount;
+            
+            let existingOutcome = outcomeTotals.find(v => v.betSide == outcome);
+           
+            if( existingOutcome != undefined){
+                existingOutcome.amount = existingOutcome.amount + amount || amount;
+            }else{
+                outcomeTotals.push({betSide: outcome, amount: amount});
+            }
 
-        for (let k in outcomes)
-        {
-            outcomes[k] /= total;
-        }
-        return outcomes;
+        });
+        
+        //stabilize amounts based on the average of bets amount
+        outcomeTotals.forEach(b => {
+            b.amount /= total;
+        })
+
+        return outcomeTotals;
     }
 }
