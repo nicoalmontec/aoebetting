@@ -1,3 +1,5 @@
+import { PlayerOdd } from "./player";
+
 export class Match{
     constructor(
         private matchId: string,
@@ -26,4 +28,10 @@ export class Match{
     public get getFinishedDate() : number {
         return this.finishedDate;
     }
+}
+
+export interface MatchOdd{
+    matchId: number;
+    firstPlayerOdd: PlayerOdd;
+    secondPlayerOdd: PlayerOdd;
 }

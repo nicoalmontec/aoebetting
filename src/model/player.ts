@@ -1,3 +1,4 @@
+import { Odd } from "./odd";
 
 export class Player {
     constructor(private username: string,
@@ -22,4 +23,9 @@ export class Player {
     get getId(): string | undefined {
         return this.id;
     }
+}
+
+export interface PlayerOdd{
+    playerId: number;
+    odd: Odd;
 }

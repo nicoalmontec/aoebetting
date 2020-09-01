@@ -9,8 +9,13 @@ export class OddsConverter {
    
    public async fromProbability(prob: number): Promise<Odd>{
 
+    if(prob <= 1){
+        prob *= 100;
+    }
     const decimal = 1 / (prob / 100);
+   
     let american = 0;
+  
     if(prob <= 50){
         american = 100 / (prob / 100) - 100;
     }else{
