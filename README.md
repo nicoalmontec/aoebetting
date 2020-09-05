@@ -25,3 +25,4 @@ to run app:
 	this will monitor changes in typescript files, compile them and restart the server
 	default port 4000: http://localhost:4000 to see the api request.
 
+# MyBashProfiles
